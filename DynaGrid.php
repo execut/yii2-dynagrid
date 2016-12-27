@@ -432,14 +432,16 @@ class DynaGrid extends Widget
      */
     protected function prepareColumns()
     {
-        $this->_columns = $this->columns;
         $columns = [];
-        foreach ($this->columns as $column) {
+        foreach ($this->columns as $key => $column) {
             if (is_array($column)) {
                 unset($column['order']);
+            } else {
+                $column = ['attribute' => $column];
             }
             $columns[] = $column;
         }
+        $this->columns = $this->_columns = $columns;
         $this->gridOptions['columns'] = $columns;
     }
 
